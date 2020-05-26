@@ -1,6 +1,6 @@
 const utils = require("./utils");
 
-const merge = (a, b, key = "key") => {
+const merge = (a, b, key) => {
   if (typeof a !== typeof b || typeof a !== "object") {
     return b;
   }

@@ -1,9 +1,24 @@
 const utils = require("./utils");
 
+const identifier = (obj, keys) => {
+  obj = Array.isArray(obj) ? obj[0] : obj
+  if (Array.isArray(keys)) {
+    const newKey = keys.filter((id) => {
+      console.log('---------')
+      console.log(obj)
+      console.log(id)
+      console.log(Object.keys(obj).includes(id))
+      return Object.keys(obj).includes(id)
+    })
+    return newKey
+  } else return keys
+}
+
 const strategicMerge = (base, edits, uniqueKey) => {
   if (typeof base !== typeof edits || typeof base !== "object") {
     return edits;
   }
+  const singleKey = identifier(base, uniqueKey)
 
   // both base and edits are objects
   const bIsArr = Array.isArray(base);
@@ -19,19 +34,21 @@ const strategicMerge = (base, edits, uniqueKey) => {
     if ((value || {}).__self === null) {
       delete base[key];
     } else {
-      base[key] = strategicMerge(base[key], value, uniqueKey);
+      base[key] = strategicMerge(base[key], value, singleKey);
     }
   }
 
   return base;
 };
 
-const patch = (base, patches = [], key = "key") => {
+const patch = (base, patches = [], key) => {
   const wasArray = Array.isArray(base);
   let itr = utils.createItr(base, key);
 
   for (const patch of patches) {
-    const uniqueId = patch[key];
+    const singleKey = identifier(patch, key)
+    // console.log(singleKey)
+    const uniqueId = patch[singleKey];
     const obj = itr[uniqueId];
     if (obj === undefined || typeof obj !== "object") {
       itr[uniqueId] = patch;

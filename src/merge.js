@@ -43,3 +43,4 @@ const merge = (a, b, key) => {
 };
 
 module.exports = merge;
+

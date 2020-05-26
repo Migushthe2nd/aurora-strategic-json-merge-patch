@@ -4,10 +4,10 @@ const identifier = (obj, keys) => {
   obj = Array.isArray(obj) ? obj[0] : obj
   if (Array.isArray(keys)) {
     const newKey = keys.filter((id) => {
-      console.log('---------')
-      console.log(obj)
-      console.log(id)
-      console.log(Object.keys(obj).includes(id))
+      // console.log('---------')
+      // console.log(obj)
+      // console.log(id)
+      // console.log(Object.keys(obj).includes(id))
       return Object.keys(obj).includes(id)
     })
     return newKey

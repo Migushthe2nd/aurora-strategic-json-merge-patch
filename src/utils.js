@@ -6,25 +6,33 @@ const customReduce = (arr, func, start, extra) => {
 };
 module.exports.customReduce = customReduce;
 
-const reducer = (a, c, key) => {
-  const k = c[key];
+const identifier = (obj, keys) => {
+  return Array.isArray(keys) ?
+    keys.filter((id) => Object.keys(obj).includes(id)) :
+    keys
+}
+
+const reducer = (a, c, keys) => {
+  const singleKey = identifier(c, keys)
+  const k = c[singleKey];
   if (k === undefined) {
     console.error(c);
-    throw new Error(`Did not find the key ${key}`);
+    throw new Error(`Did not find the key ${singleKey}`);
   }
   a[k] = c;
   return a;
 };
 
-module.exports.createItr = (obj, key) => {
+module.exports.createItr = (obj, keys) => {
   if (Array.isArray(obj)) {
-    return customReduce(obj, reducer, {}, key);
+    return customReduce(obj, reducer, {}, singleKey);
   }
-  if (obj[key] === undefined) {
+  const singleKey = identifier(obj, keys)
+  if (obj[singleKey] === undefined) {
     return obj;
   }
   return {
-    [obj[key]]: obj
+    [obj[singleKey]]: obj
   };
 };
 

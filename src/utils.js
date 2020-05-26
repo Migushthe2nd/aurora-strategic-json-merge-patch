@@ -25,7 +25,7 @@ const reducer = (a, c, keys) => {
 
 module.exports.createItr = (obj, keys) => {
   if (Array.isArray(obj)) {
-    return customReduce(obj, reducer, {}, singleKey);
+    return customReduce(obj, reducer, {}, keys);
   }
   const singleKey = identifier(obj, keys)
   if (obj[singleKey] === undefined) {

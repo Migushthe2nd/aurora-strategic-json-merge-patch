@@ -7,7 +7,7 @@ const customReduce = (arr, func, start, extra) => {
 module.exports.customReduce = customReduce;
 
 const identifier = (obj, keys) => {
-  console.log(keys)
+  // console.log(keys)
   obj = Array.isArray(obj) ? obj[0] : obj
   if (Array.isArray(keys)) {
     const newKey = keys.filter((id) => {

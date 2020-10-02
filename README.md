@@ -2,6 +2,9 @@
 
 Aurora Strategic JSON Merge allows diffing and merging of objects, including array entries, however each array entry needs to have an object with a `key` attribute to serve as a unique identifier.
 
+## NOTE
+This repo contains a modified version of Aurora Strategic JSON Merge which fits Themezer's needs.
+
 ## Installation
 
 `npm install https://github.com/tromkom/aurora-strategic-json-merge-patch`

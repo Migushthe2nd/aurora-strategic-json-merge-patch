@@ -43,11 +43,17 @@ const strategicMerge = (base, edits, uniqueKey) => {
 
 const patch = (base, patches = [], key) => {
   const wasArray = Array.isArray(base);
+
   let itr = utils.createItr(base, key);
 
+  if (!base.some((v) => typeof v === 'object')) {
+    // This is an array of values
+    return base = patches
+  }
+
   for (const patch of patches) {
+
     const singleKey = identifier(patch, key)
-    // console.log(singleKey)
     const uniqueId = patch[singleKey];
     const obj = itr[uniqueId];
     if (obj === undefined || typeof obj !== "object") {
